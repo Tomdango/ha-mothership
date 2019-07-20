@@ -3,13 +3,32 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "pm2 start server.js --name=HomeAutomation",
+    "dev": "pm2 start server.js --name=HomeAutomationDev --watch"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "express-ws": "^4.0.0",
+    "hertzy": "^0.1.1",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "libnmap": "^0.4.16",
+    "mongoose": "^5.6.1",
+    "morgan": "~1.9.1",
+    "socket.io": "^2.2.0",
+    "uuid": "^3.3.2",
+    "websocket": "^1.0.29",
+    "winston": "^3.2.1",
+    "ws": "^7.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2"
   }
 }

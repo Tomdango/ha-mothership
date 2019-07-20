@@ -1,20 +1,27 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const morgan = require('morgan');
+const core = require('./core');
+const logger = require('./core/logging')('express');
+const registerControllers = require('./controllers');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const setupApp = app => {
+  core(app);
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE');
+    next();
+  });
+  app.use(morgan('dev', { stream: logger.stream }));
+  app.use(express.json());
+  registerControllers(app);
+  app.use((req, res) => {
+    res.sendStatus(404);
+    // TODO: Add error handler
+  });
+  // Ready for React App
+  // app.use('/ui', express.static(path.join(__dirname, 'public')));
+  return app;
+};
 
-var app = express();
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-module.exports = app;
+module.exports = setupApp(express());
