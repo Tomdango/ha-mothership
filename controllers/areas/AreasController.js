@@ -5,10 +5,11 @@ const logger = require('../../core/logging')('controller:area');
 const Area = mongoose.model('Area');
 const AreaHistory = mongoose.model('AreaHistory');
 
-router.use(req => {
+router.use((req, res, next) => {
   req.log = (level, message) => {
     logger.log(level, `${message} | ip=${req.ip} route=${req.route}`);
   };
+  next();
 });
 
 router.get('/', async (req, res) => {

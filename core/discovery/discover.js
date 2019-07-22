@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const { lookup } = require('dns');
 const { hostname } = require('os');
 const logger = require('../logging')('discovery');
+const { NMAP_RANGE } = require('../constants/discovery');
 
 const Node = mongoose.model('Node');
 let serverIp = '';
@@ -16,7 +17,7 @@ class DiscoveryProtocol {
       timeout: timeout || 10,
       discoveryPort: port || '15000',
       ports: port || '15000',
-      range: range || ['192.168.1.1-50']
+      range: range || NMAP_RANGE
     };
     DiscoveryProtocol.fetchIp();
     setInterval(DiscoveryProtocol.fetchIp, 60000);

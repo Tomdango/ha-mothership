@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const path = require('path');
 const core = require('./core');
 const logger = require('./core/logging')('express');
 const registerControllers = require('./controllers');
@@ -12,6 +13,8 @@ const setupApp = app => {
     res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE');
     next();
   });
+
+  app.use('/ui/*', express.static(path.join(__dirname, 'ui')));
   app.use(morgan('dev', { stream: logger.stream }));
   app.use(express.json());
   registerControllers(app);
@@ -19,8 +22,6 @@ const setupApp = app => {
     res.sendStatus(404);
     // TODO: Add error handler
   });
-  // Ready for React App
-  // app.use('/ui', express.static(path.join(__dirname, 'public')));
   return app;
 };
 

@@ -1,5 +1,6 @@
 require('./database');
 require('./discovery');
+require('./routine');
 const expressWs = require('express-ws');
 const websocket = require('./websocket');
 

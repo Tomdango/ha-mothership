@@ -3,6 +3,7 @@ const http = require('http');
 const ws = require('express-ws');
 const expressApp = require('./app');
 const logger = require('./core/logging')('http');
+require('dotenv').config();
 
 class Server {
   constructor(app, opt = {}) {
