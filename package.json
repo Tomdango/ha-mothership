@@ -18,7 +18,7 @@
     "libnmap": "^0.4.16",
     "mongoose": "^5.6.1",
     "morgan": "~1.9.1",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.4.0",
     "uuid": "^3.3.2",
     "websocket": "^1.0.29",
     "winston": "^3.2.1",
